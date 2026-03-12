@@ -147,7 +147,7 @@ async function generateAISignal() {
     });
 
     // Call Gemini directly — browser calls are allowed by Google's API
-    const GEMINI_KEY = 'AIzaSyC3udSXdcuRWHlUnfB0LHVc9UOheSXVxY'; // public-facing key, restricted by domain
+    const GEMINI_KEY = 'AIzaSyC3udSXdcuRWHlUnfB0LHVc9UOheF5XVxY'; // public-facing key, restricted by domain
     const systemPrompt = `You are an elite institutional forex trader with 20 years of experience at tier-1 banks and hedge funds.
 You specialise in ICT (Inner Circle Trader) Smart Money Concepts, price action, and multi-timeframe analysis.
 You are given REAL market data: actual OHLC candles, computed technical indicators, and detected market structure.
