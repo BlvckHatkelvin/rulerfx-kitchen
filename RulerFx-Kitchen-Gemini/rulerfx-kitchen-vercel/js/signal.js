@@ -146,27 +146,43 @@ async function generateAISignal() {
       account, riskpct, context,
     });
 
-    // Call our secure proxy — API keys never touch the browser
-    const response = await fetch(`${PROXY_URL}/api/ai`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        max_tokens: 1200,
-        system: `You are an elite institutional forex trader with 20 years of experience at tier-1 banks and hedge funds.
+    // Call Gemini directly — browser calls are allowed by Google's API
+    const GEMINI_KEY = 'AIzaSyC3udSXdcuRWHlUnfB0LHVc9UOheSXVxY'; // public-facing key, restricted by domain
+    const systemPrompt = `You are an elite institutional forex trader with 20 years of experience at tier-1 banks and hedge funds.
 You specialise in ICT (Inner Circle Trader) Smart Money Concepts, price action, and multi-timeframe analysis.
 You are given REAL market data: actual OHLC candles, computed technical indicators, and detected market structure.
 Your analysis is PURELY based on this real data — not guesswork.
 Give DECISIVE, SPECIFIC signals with EXACT prices derived from the actual candle data provided.
 You never give vague answers. Every level you cite must be derived from the actual price data given to you.
-Respond ONLY in valid JSON — no markdown, no preamble, no extra text.`,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
+Respond ONLY in valid JSON — no markdown, no preamble, no extra text.`;
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+      {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: systemPrompt + '\n\n' + prompt }] }],
+          generationConfig: {
+            temperature:      0.2,
+            maxOutputTokens:  1200,
+            responseMimeType: 'application/json',
+          },
+          safetySettings: [
+            { category: 'HARM_CATEGORY_HARASSMENT',        threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_HATE_SPEECH',       threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
+    if (!response.ok) throw new Error(data?.error?.message || 'Gemini API error');
 
-    const raw  = data.content?.[0]?.text || '';
+    const raw  = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    if (!raw) throw new Error('Gemini returned empty response. Try again.');
     const json = parseAIResponse(raw);
     if (!json) throw new Error('Could not parse AI response. Raw: ' + raw.slice(0, 200));
 
