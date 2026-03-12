@@ -20,7 +20,7 @@
 ═══════════════════════════════════════ */
 
 let liveData     = {};
-// FCS key held securely on proxy server — not exposed here
+const FCS_KEY = true; // key is on proxy server — always attempt proxy call
 let eraRates     = {};
 let tickInterval = null;
 let fetchInterval= null;
@@ -39,8 +39,7 @@ async function initPrices() {
   startRealtimeTick();
   startPeriodicRefresh();
 
-  // Hide API notice if FCS key already saved
-  if (FCS_KEY) dismissNotice();
+  // FCS key handled by proxy server
 }
 
 // ─────────────────────────────────────
@@ -316,8 +315,7 @@ function setApiStatus(text, live) {
 function setApiKey() {
   const key = document.getElementById('apiKeyInput')?.value?.trim();
   if (!key) return;
-  FCS_KEY = key;
-  localStorage.setItem('rfx_fcs_key', key);
+  // key managed by proxy
   fetchFCSPrices();
   dismissNotice();
 }
