@@ -166,7 +166,6 @@ Respond ONLY in valid JSON — no markdown, no preamble, no extra text.`;
           generationConfig: {
             temperature:      0.2,
             maxOutputTokens:  1200,
-            responseMimeType: 'application/json',
           },
           safetySettings: [
             { category: 'HARM_CATEGORY_HARASSMENT',        threshold: 'BLOCK_NONE' },
