@@ -1,0 +1,10 @@
+{
+  "name": "rulerfx-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RulerFx Kitchen — secure API proxy (keys never exposed to frontend)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

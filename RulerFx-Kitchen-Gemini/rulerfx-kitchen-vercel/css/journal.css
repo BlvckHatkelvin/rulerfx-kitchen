@@ -1,0 +1,69 @@
+/* ════════════════════════════════════════
+   RulerFx Kitchen — journal.css
+   Trade Journal Styles
+═══════════════════════════════════════ */
+
+/* ── JOURNAL STATS BAR ── */
+.journal-stats {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  gap: 12px; margin-bottom: 20px;
+}
+.jstat {
+  padding: 18px; text-align: center;
+  background: rgba(255,255,255,.52);
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 16px;
+  box-shadow: var(--sh);
+}
+.jstat .jsl { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--soft); margin-bottom: 5px; }
+.jstat .jsv { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--dark); }
+.jstat .jsv.pos { color: var(--green); }
+.jstat .jsv.neg { color: var(--red); }
+.jstat .jsv.gold{ color: var(--gold); }
+
+/* ── JOURNAL GRID ── */
+.journal-grid { display: grid; grid-template-columns: 360px 1fr; gap: 18px; }
+.journal-form  { padding: 26px; }
+.journal-right { display: flex; flex-direction: column; gap: 16px; }
+
+/* ── PERF GRID ── */
+.perf-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;
+}
+.pg-item {
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 12px; padding: 14px; text-align: center;
+}
+.pg-lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--soft); margin-bottom: 4px; }
+.pg-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--dark); }
+.pg-val.g { color: var(--green); }
+.pg-val.r { color: var(--red); }
+.pg-val.gold { color: var(--gold); }
+
+/* ── JOURNAL TABLE ── */
+#journalTbody td { font-size: 12px; }
+.jresult { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 50px; }
+.jresult.win  { background: var(--greenp); color: var(--green); }
+.jresult.loss { background: var(--redp);   color: var(--red);   }
+.jresult.be   { background: var(--goldp);  color: var(--gold);  }
+.jresult.open { background: rgba(91,155,213,.1); color: var(--blue3); }
+
+.del-btn {
+  background: var(--redp); color: var(--red); border: none;
+  border-radius: 6px; padding: 4px 9px; font-size: 11px;
+  cursor: pointer; transition: all .2s; font-weight: 600;
+}
+.del-btn:hover { background: var(--red); color: #fff; }
+
+/* ── EMOTION BADGE ── */
+.emo-badge { font-size: 11px; }
+
+@media (max-width: 900px) {
+  .journal-grid  { grid-template-columns: 1fr; }
+  .journal-stats { grid-template-columns: repeat(3,1fr); }
+  .perf-grid     { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .journal-stats { grid-template-columns: 1fr 1fr; }
+}
