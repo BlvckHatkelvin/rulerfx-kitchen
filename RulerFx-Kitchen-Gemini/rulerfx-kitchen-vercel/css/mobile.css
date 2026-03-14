@@ -1,0 +1,418 @@
+/* ════════════════════════════════════════
+   RulerFx Kitchen — mobile.css
+   Full mobile app experience
+   Only applies on screens ≤ 640px
+   Desktop is completely unaffected
+═══════════════════════════════════════ */
+
+@media (max-width: 640px) {
+
+  /* ══ BASE RESET ══ */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    -webkit-text-size-adjust: 100%;
+  }
+  *, *::before, *::after {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .wrap {
+    padding: 0 0 80px 0;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* ══ HEADER — compact app bar ══ */
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 0;
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .hb-text h1  { font-size: 18px; }
+  .hb-text .sub { display: none; }
+  .logo-wrap   { width: 36px; height: 36px; }
+  .hbr         { gap: 4px; }
+  .pill        { font-size: 9px; padding: 3px 7px; }
+
+  /* ══ CLOCK BAR — horizontal scroll ══ */
+  .clock-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 8px 12px;
+    gap: 6px;
+    margin-bottom: 0;
+    background: rgba(255,255,255,.4);
+    border-bottom: 1px solid rgba(160,196,232,.2);
+  }
+  .clock-bar::-webkit-scrollbar { display: none; }
+  .tz {
+    flex-shrink: 0;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  /* ══ TICKER ══ */
+  .ticker-wrap {
+    margin-bottom: 0;
+    border-radius: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(160,196,232,.15);
+  }
+
+  /* ══ TABS — hidden on mobile, replaced by bottom nav ══ */
+  .tabs { display: none !important; }
+
+  /* ══ BOTTOM NAVIGATION BAR ══ */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(246,242,234,.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(160,196,232,.3);
+    padding: 0;
+    box-shadow: 0 -4px 20px rgba(91,155,213,.12);
+  }
+  .mnav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px 10px;
+    gap: 3px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--soft);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mnav-btn .mnav-ico { font-size: 18px; line-height: 1; }
+  .mnav-btn .mnav-lbl { font-size: 9px; font-weight: 600; letter-spacing: .3px; white-space: nowrap; }
+  .mnav-btn.active { color: var(--blue3); }
+  .mnav-btn.active .mnav-ico { transform: translateY(-2px); }
+
+  /* ══ PANELS — full width, no side padding ══ */
+  .panel { padding: 0; }
+  .panel.active { animation: none; }
+
+  /* ══ SECTION PADDING WRAPPER ══ */
+  .mobile-pad { padding: 12px 12px 0; }
+
+  /* Glass cards — full width, less radius */
+  .g1, .g2, .g3 {
+    border-radius: 14px;
+  }
+
+  /* ══ SIGNAL ENGINE ══ */
+  .engine-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 10px 10px 0 !important;
+  }
+  .engine-left  { padding: 14px 14px; }
+  .engine-right { padding: 14px 14px; }
+
+  /* Pair search */
+  .pair-search-wrap { margin-bottom: 10px; }
+  .pair-search { font-size: 14px; padding: 10px 14px 10px 36px; border-radius: 10px; }
+
+  /* Cat tabs */
+  .cat-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 3px;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  .cat-tabs::-webkit-scrollbar { display: none; }
+  .cat-tab { flex-shrink: 0; font-size: 10px; padding: 5px 12px; }
+
+  /* Pair list */
+  .pair-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+    max-height: 150px;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .pair-btn { font-size: 11px; padding: 8px 4px; border-radius: 8px; }
+
+  /* Inputs */
+  .ig { margin-bottom: 10px; }
+  .ig label { font-size: 9px; letter-spacing: .8px; }
+  .ig select, .ig input {
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    height: 44px; /* touch friendly */
+  }
+  .ig2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px;
+  }
+
+  /* Analyse button */
+  .btn {
+    width: 100% !important;
+    padding: 14px !important;
+    font-size: 15px !important;
+    border-radius: 12px !important;
+    height: 50px;
+  }
+  .btn-outline { height: auto; }
+
+  /* What AI analyses box */
+  .engine-left > div[style*="background:rgba(30"] {
+    padding: 12px !important;
+    font-size: 11px !important;
+  }
+
+  /* ══ SIGNAL OUTPUT ══ */
+  .empty-state { padding: 40px 16px; }
+  .empty-icon  { font-size: 36px; opacity: .35; }
+  .empty-title { font-size: 17px; }
+  .empty-sub   { font-size: 12px; max-width: 260px; margin: 0 auto; }
+
+  /* Verdict banner — stacked */
+  .sig-main {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px !important;
+    gap: 14px !important;
+    align-items: stretch !important;
+    border-radius: 14px;
+  }
+  .sig-dir  { text-align: center; }
+  .sig-word { font-size: 60px; letter-spacing: -2px; }
+  .sl-lbl   { font-size: 9px; letter-spacing: 2px; }
+  .sig-pair-display { font-size: 11px; margin-top: 2px; }
+  .conf { text-align: center; }
+  .cr   { justify-content: center; gap: 10px; margin-bottom: 6px; }
+  .cpct { font-size: 30px; }
+  .clbl { font-size: 10px; }
+  .bar-sub { font-size: 10px; margin-top: 5px; }
+  .rrr-b {
+    text-align: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(160,196,232,.2);
+  }
+  .rrr-b .rl { font-size: 9px; }
+  .rrr-b .rv { font-size: 26px; }
+
+  /* Strategy badges */
+  #stratBadge {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+    margin-bottom: 10px !important;
+  }
+  .strat-badge { font-size: 10px; padding: 4px 9px; }
+
+  /* Levels — 2×2 */
+  .levels {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  .lv { padding: 12px 10px; border-radius: 11px; text-align: center; }
+  .lv .ll  { font-size: 9px; letter-spacing: 1px; margin-bottom: 4px; }
+  .lv .lv2 { font-size: 16px; }
+  .lv .ls  { font-size: 10px; margin-top: 2px; }
+
+  /* Risk metrics — 2×2 */
+  .risk-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  .rs { padding: 12px 10px; text-align: center; }
+  .rs .rl { font-size: 9px; letter-spacing: 1px; }
+  .rs .rv { font-size: 18px; }
+
+  /* Checklist — single col */
+  .checks {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+  }
+  .ci  { font-size: 12px; padding: 8px 11px; }
+  .cid { width: 18px; height: 18px; font-size: 10px; }
+
+  /* Notes */
+  .notes       { padding: 12px 13px; font-size: 12.5px; }
+  .notes-label { font-size: 9px; letter-spacing: 1px; }
+  .ai-reasoning { padding: 12px 13px; font-size: 12.5px; line-height: 1.8; }
+
+  /* Loading */
+  #aiLoading { padding: 40px 16px !important; }
+  .ai-spinner { width: 40px; height: 40px; }
+
+  /* Log trade button */
+  #logTradeBtn { margin-top: 10px; }
+
+  /* ══ LIVE CHART ══ */
+  .chart-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 12px 14px !important;
+    gap: 10px !important;
+  }
+  .chart-controls {
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    overflow-x: auto;
+  }
+  .chart-controls::-webkit-scrollbar { display: none; }
+  .chart-controls select {
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 8px 10px;
+    height: 38px;
+  }
+  .chart-price-display {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #chartCurrentPrice { font-size: 20px !important; }
+  .chart-container {
+    height: 300px !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+  }
+  .chart-indicators {
+    padding: 10px 12px !important;
+    flex-wrap: wrap !important;
+    gap: 4px 0 !important;
+  }
+  .ind-item { padding: 0 10px; }
+  .ind-lbl  { font-size: 9px; }
+  .ind-val  { font-size: 12px; }
+
+  /* ══ MARKET OVERVIEW ══ */
+  .mkt-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+  .mc { padding: 12px 10px; }
+  .mc .mn  { font-size: 9px; }
+  .mc .mp  { font-size: 14px; }
+  .mc .mc2 { font-size: 10px; }
+
+  .sentiment-grid { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Calendar */
+  .cal-row   { gap: 6px; padding: 9px 0; }
+  .cal-time  { font-size: 11px; flex: 0 0 34px; }
+  .cal-cur   { font-size: 10px; flex: 0 0 26px; }
+  .cal-event { font-size: 12px; }
+  .imp-badge { font-size: 9px; padding: 2px 6px; flex-shrink: 0; }
+
+  /* ══ STRATEGIES ══ */
+  .strat-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .sc { padding: 14px 14px; }
+  .sc .si { font-size: 20px; margin-bottom: 8px; }
+  .sc .sn { font-size: 16px; margin-bottom: 6px; }
+  .sc .sd { font-size: 12px; line-height: 1.55; }
+  .stag   { font-size: 10px; padding: 3px 8px; }
+  .sdet-box  { padding: 8px 10px; }
+  .sdet-val  { font-size: 12px; }
+  .sdet-text { font-size: 12px; }
+  .sdet-section-title { font-size: 10px; }
+  .sdet-note { padding: 9px 11px; font-size: 12px; }
+
+  /* ══ ALL PAIRS TABLE ══ */
+  .pairs-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 12px;
+  }
+  table { min-width: 500px !important; }
+  th    { font-size: 9px !important; padding: 8px 10px !important; }
+  td    { font-size: 12px !important; padding: 9px 10px !important; }
+
+  /* ══ TRADE JOURNAL ══ */
+  .journal-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+  .jstat { padding: 12px 10px; border-radius: 12px; }
+  .jstat .jsl { font-size: 9px; letter-spacing: 1px; }
+  .jstat .jsv { font-size: 20px; }
+
+  .journal-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .journal-form { padding: 14px 14px; }
+  .ig2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  .perf-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .pg-item { padding: 11px 10px; border-radius: 10px; }
+  .pg-lbl  { font-size: 9px; }
+  .pg-val  { font-size: 18px; }
+
+  /* ══ RULES / EDUCATION ══ */
+  .edu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .ec { padding: 14px 14px; }
+  .ec h3 { font-size: 15px; margin-bottom: 10px; }
+  .en { font-size: 11px; flex: 0 0 90px; }
+  .ev { font-size: 11px; }
+
+  .sess-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .sesscard { padding: 12px 10px; }
+  .sn2 { font-size: 9px; }
+  .st2 { font-size: 12px; }
+  .sb2 { font-size: 9px; }
+
+  /* ══ SECTION HEADERS ══ */
+  .sec-hdr { gap: 9px; }
+  .sec-hdr h2 { font-size: 15px; }
+  .sec-hdr p  { font-size: 10px; }
+  .sico { width: 28px; height: 28px; font-size: 12px; border-radius: 8px; }
+
+  /* ══ PADDING OVERRIDES for inline-styled containers ══ */
+  .g1[style*="padding"], .g2[style*="padding"] {
+    padding: 14px 14px !important;
+  }
+
+  /* ══ FOOTER ══ */
+  .footer { font-size: 10px; padding: 14px 12px 16px; line-height: 1.7; }
+}
