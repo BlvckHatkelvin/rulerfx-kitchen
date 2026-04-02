@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RulerFx Kitchen — Professional Forex Signal Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F6F2EA;
+  --blue:  #C5DCEF;
+  --blue2: #A3C8E8;
+  --blue3: #5B9BD5;
+  --blue4: #2E6DA4;
+  --gold:  #C08A20;
+  --gold2: #E8B84B;
+  --green: #1E9E6A;
+  --red:   #D03030;
+  --dark:  #161B2E;
+  --mid:   #3D4A5C;
+  --soft:  #8492A6;
+  --glass: rgba(255,255,255,.52);
+  --glass2:rgba(255,255,255,.72);
+  --gb:    rgba(255,255,255,.85);
+  --sh:    0 8px 32px rgba(91,155,213,.1), 0 2px 8px rgba(91,155,213,.07);
+  --sh2:   0 20px 60px rgba(91,155,213,.15), 0 4px 16px rgba(91,155,213,.08);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; min-width:0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 75% 55% at 8% 4%, rgba(197,220,239,.7) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 45% at 92% 88%, rgba(197,220,239,.5) 0%, transparent 48%),
+    radial-gradient(ellipse 45% 40% at 52% 52%, rgba(246,242,234,.9) 0%, transparent 62%),
+    linear-gradient(150deg, #EAF2FB 0%, #F6F2EA 40%, #E6EEF8 100%);
+}
+.blob {
+  position: fixed; border-radius: 50%; filter: blur(70px); opacity: .28;
+  pointer-events: none; z-index: 0; animation: bf 22s ease-in-out infinite;
+}
+.blob:nth-child(1) { width:520px;height:520px;background:rgba(163,200,232,.55);top:-110px;left:-110px;animation-delay:0s; }
+.blob:nth-child(2) { width:400px;height:400px;background:rgba(197,220,239,.45);top:55%;right:-80px;animation-delay:-8s; }
+.blob:nth-child(3) { width:300px;height:300px;background:rgba(232,184,75,.16);bottom:6%;left:25%;animation-delay:-16s; }
+@keyframes bf { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(32px,-22px) scale(1.05)} 66%{transform:translate(-22px,28px) scale(.96)} }
+
+/* ── GLASS CARDS ── */
+.g1 {
+  background: var(--glass);
+  backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--gb); border-radius: 20px; box-shadow: var(--sh);
+}
+.g2 {
+  background: var(--glass2);
+  backdrop-filter: blur(34px); -webkit-backdrop-filter: blur(34px);
+  border: 1px solid rgba(255,255,255,.88); border-radius: 18px; box-shadow: var(--sh2);
+}
+
+/* ── LAYOUT ── */
+.z { position: relative; z-index: 1; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 14px 0;
+  background: rgba(246,242,234,.82);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(197,220,239,.4);
+  transition: all .3s;
+}
+.nav-inner {
+  max-width: 1140px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.nav-logo svg { width: 42px; height: 42px; }
+.nav-logo-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 700; letter-spacing: -.3px; line-height: 1;
+}
+.nav-logo-text h1 span { color: var(--gold); }
+.nav-logo-text .sub {
+  font-size: 9px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--blue3); margin-top: 2px;
+}
+.nav-cta {
+  background: linear-gradient(135deg, var(--blue3) 0%, #3B82C4 100%);
+  color: #fff; font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 13px;
+  padding: 10px 22px; border-radius: 50px; border: none;
+  cursor: pointer; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(91,155,213,.3);
+  transition: all .2s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(91,155,213,.4); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 110px 0 80px; position: relative;
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(91,155,213,.1); border: 1px solid rgba(91,155,213,.25);
+  border-radius: 50px; padding: 6px 14px; margin-bottom: 22px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--blue3);
+}
+.hero-eyebrow::before {
+  content:''; width:6px; height:6px; background:var(--green);
+  border-radius:50%; animation: lp 2s infinite;
+  box-shadow: 0 0 0 3px rgba(30,158,106,.2);
+}
+@keyframes lp { 0%,100%{box-shadow:0 0 0 3px rgba(30,158,106,.18)} 50%{box-shadow:0 0 0 6px rgba(30,158,106,.05)} }
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 62px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -.5px;
+  margin-bottom: 20px; color: var(--dark);
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 15px; color: var(--soft); line-height: 1.75;
+  margin-bottom: 32px; max-width: 460px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue3), #3B82C4);
+  color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 15px;
+  padding: 13px 30px; border-radius: 50px; border: none; cursor: pointer;
+  text-decoration: none; box-shadow: 0 6px 22px rgba(91,155,213,.35);
+  transition: all .25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(91,155,213,.45); }
+.btn-secondary {
+  background: var(--glass); color: var(--mid); font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 15px; padding: 13px 26px; border-radius: 50px;
+  border: 1.5px solid rgba(91,155,213,.25); cursor: pointer; text-decoration: none;
+  backdrop-filter: blur(12px); transition: all .25s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: rgba(255,255,255,.75); border-color: var(--blue3); color: var(--blue3); }
+
+.hero-stats {
+  display: flex; gap: 28px; margin-top: 40px; padding-top: 32px;
+  border-top: 1px solid rgba(163,200,232,.3); flex-wrap: wrap;
+}
+.hstat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px; font-weight: 700; color: var(--blue3); line-height: 1;
+}
+.hstat-lbl { font-size: 11px; color: var(--soft); margin-top: 3px; font-weight: 500; }
+
+/* ── HERO CHART CARD ── */
+.hero-chart {
+  padding: 22px; animation: rise .8s .2s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes rise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.chart-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+.ct-pair { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--soft); }
+.ct-price { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--dark); line-height: 1.1; }
+.ct-chg { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 5px; background: rgba(30,158,106,.1); color: var(--green); }
+
+.signal-banner {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(30,158,106,.08); border: 1px solid rgba(30,158,106,.2);
+  border-radius: 10px; padding: 10px 14px; margin-top: 14px;
+}
+.sig-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: lp 2s infinite; }
+.sig-text { font-size: 12px; font-weight: 700; color: var(--green); }
+.sig-lvls { margin-left: auto; display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--soft); }
+.sig-lvls span { color: var(--dark); font-weight: 500; }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  overflow: hidden; padding: 12px 0; margin: 0;
+  background: rgba(255,255,255,.35); border-top: 1px solid rgba(163,200,232,.2); border-bottom: 1px solid rgba(163,200,232,.2);
+}
+.ticker-inner { display:flex; gap:0; width:max-content; animation:tick 45s linear infinite; }
+.ticker-item  { display:flex; align-items:center; gap:10px; padding:6px 22px; border-right:1px solid rgba(163,200,232,.2); white-space:nowrap; }
+.t-pair  { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--soft); }
+.t-price { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; color:var(--dark); }
+.t-chg.up { font-size:10px; font-weight:700; background:rgba(30,158,106,.1); color:var(--green); padding:1px 6px; border-radius:4px; }
+.t-chg.dn { font-size:10px; font-weight:700; background:rgba(208,48,48,.1); color:var(--red); padding:1px 6px; border-radius:4px; }
+@keyframes tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── SECTIONS ── */
+.section { padding: 90px 0; }
+.section-eye {
+  font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--blue3); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 700; line-height: 1.15; letter-spacing: -.3px;
+  color: var(--dark); margin-bottom: 14px;
+}
+.section-sub { font-size: 15px; color: var(--soft); line-height: 1.7; max-width: 500px; }
+
+/* ── HOW IT WORKS ── */
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 2px; margin-top: 52px; border-radius: 20px; overflow: hidden;
+}
+.step {
+  background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.7); padding: 28px 22px; position: relative;
+  transition: all .3s;
+}
+.step:first-child { border-radius: 20px 0 0 20px; }
+.step:last-child  { border-radius: 0 20px 20px 0; }
+.step:hover { background: rgba(255,255,255,.72); transform: translateY(-4px); box-shadow: var(--sh2); z-index: 2; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 900;
+  color: rgba(91,155,213,.15); line-height: 1; margin-bottom: 12px;
+}
+.step-ico   { font-size: 26px; margin-bottom: 12px; }
+.step-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
+.step-desc  { font-size: 12px; color: var(--soft); line-height: 1.65; }
+
+/* ── FEATURES ── */
+.features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 52px; }
+.feat {
+  padding: 26px 22px; transition: all .3s; cursor: default;
+}
+.feat:hover { transform: translateY(-3px); box-shadow: var(--sh2); }
+.feat-ico   { font-size: 28px; margin-bottom: 14px; }
+.feat-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
+.feat-desc  { font-size: 12px; color: var(--soft); line-height: 1.65; }
+
+/* ── STRATEGIES ── */
+.strat-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-top: 52px; }
+.strat-list { display: flex; flex-direction: column; gap: 8px; }
+.strat-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px; cursor: pointer;
+  border: 1px solid rgba(163,200,232,.2);
+  background: rgba(255,255,255,.35); transition: all .2s;
+}
+.strat-item:hover, .strat-item.active {
+  background: rgba(255,255,255,.75);
+  border-color: rgba(91,155,213,.35);
+  box-shadow: var(--sh);
+}
+.strat-item.active { border-color: var(--blue3); }
+.strat-item-ico  { font-size: 18px; flex-shrink: 0; }
+.strat-item-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+.strat-item-wr   { margin-left: auto; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 50px; background: rgba(30,158,106,.1); color: var(--green); white-space: nowrap; }
+
+.strat-detail {
+  padding: 28px; position: sticky; top: 90px;
+}
+.sd-num  { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 900; color: rgba(91,155,213,.12); line-height: 1; margin-bottom: -8px; }
+.sd-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.sd-desc  { font-size: 13px; color: var(--soft); line-height: 1.7; margin-bottom: 18px; }
+.sd-trigger {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 13px; border-radius: 9px; margin-bottom: 8px;
+  font-size: 12px; line-height: 1.55;
+}
+.sd-trigger.buy  { background: rgba(30,158,106,.07); border: 1px solid rgba(30,158,106,.18); color: var(--green); }
+.sd-trigger.sell { background: rgba(208,48,48,.06);  border: 1px solid rgba(208,48,48,.15);  color: var(--red); }
+.sd-trigger-ico  { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── CHART PATTERNS ── */
+.patterns-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 52px; }
+.pattern-card { padding: 20px; transition: all .3s; }
+.pattern-card:hover { transform: translateY(-2px); box-shadow: var(--sh2); }
+.pattern-svg { margin-bottom: 12px; }
+.pattern-name { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+.pattern-type {
+  font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 7px;
+}
+.pt-bull { background: rgba(30,158,106,.1); color: var(--green); }
+.pt-bear { background: rgba(208,48,48,.08); color: var(--red); }
+.pt-neut { background: rgba(91,155,213,.1); color: var(--blue3); }
+.pattern-desc { font-size: 11px; color: var(--soft); line-height: 1.6; }
+
+/* ── CTA ── */
+.cta-section { padding: 60px 0 100px; }
+.cta-card { padding: 72px 48px; text-align: center; position: relative; overflow: hidden; }
+.cta-card::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(91,155,213,.08) 0%, transparent 70%);
+}
+.cta-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px,3.5vw,50px); font-weight: 700; letter-spacing: -.3px;
+  color: var(--dark); margin-bottom: 14px; position: relative;
+}
+.cta-card h2 em { font-style: italic; color: var(--gold); }
+.cta-card p { font-size: 15px; color: var(--soft); max-width: 460px; margin: 0 auto 32px; line-height: 1.7; position: relative; }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid rgba(163,200,232,.25); padding: 36px 0; }
+.footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+.footer-logo { display:flex; align-items:center; gap:10px; }
+.footer-logo h3 { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; color:var(--dark); }
+.footer-logo h3 span { color:var(--gold); }
+.footer-copy { font-size:12px; color:var(--soft); }
+.footer-disc { font-size:11px; color:var(--soft); opacity:.65; max-width:440px; line-height:1.6; text-align:right; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.anim { opacity:0; }
+.anim.visible { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) forwards; }
+.d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s} .d4{animation-delay:.4s}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero-grid     { grid-template-columns:1fr; gap:40px; }
+  .hero-chart    { order:-1; }
+  .steps-grid    { grid-template-columns:1fr 1fr; border-radius:14px; }
+  .step:first-child { border-radius:14px 0 0 0; }
+  .step:last-child  { border-radius:0 0 14px 14px; grid-column:span 2; }
+  .features-grid { grid-template-columns:1fr 1fr; }
+  .strat-showcase{ grid-template-columns:1fr; }
+  .strat-detail  { display:none; }
+  .patterns-grid { grid-template-columns:1fr 1fr; }
+  .cta-card      { padding:48px 22px; }
+  .footer-disc   { text-align:left; }
+  nav .nav-links { display:none; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns:1fr; }
+  .patterns-grid { grid-template-columns:1fr; }
+  .steps-grid    { grid-template-columns:1fr; }
+  .step:first-child,.step:last-child { border-radius:14px; grid-column:span 1; }
+  .hero-stats    { gap:16px; }
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="blob"></div>
+<div class="blob"></div>
+<div class="blob"></div>
+
+<!-- ── NAV ── -->
+<nav class="z">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8B84B"/><stop offset="100%" stop-color="#C08A20"/></linearGradient>
+          <linearGradient id="lg2" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5B9BD5"/><stop offset="100%" stop-color="#2E6DA4"/></linearGradient>
+        </defs>
+        <rect x="0" y="0" width="52" height="52" rx="14" fill="url(#lg1)" opacity="0.15"/>
+        <rect x="1" y="1" width="50" height="50" rx="13" fill="none" stroke="url(#lg1)" stroke-width="1.2" opacity="0.5"/>
+        <path d="M10 13h10c3.3 0 6 2.7 6 6v0c0 3.3-2.7 6-6 6H10V13z" fill="none" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="10" y1="25" x2="10" y2="38" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 25l6 13" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M30 13h10M30 20h8" stroke="url(#lg2)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="30" y1="13" x2="30" y2="28" stroke="url(#lg2)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M30 32l8 9M38 32l-8 9" stroke="url(#lg2)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="nav-logo-text">
+        <h1>RulerFx <span>Kitchen</span></h1>
+        <div class="sub">Forex Signal Platform</div>
+      </div>
+    </a>
+    <a href="index.html" class="nav-cta">Launch Platform →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero z">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Rule-Based Signal Engine · Live Now</div>
+        <h1>Trade With <em>Institutional</em><br>Precision</h1>
+        <p class="hero-sub">RulerFx Kitchen analyses 45+ forex pairs using 5 professional strategies. Get precise Entry, Stop Loss, and Take Profit levels in seconds — backed by real candle data and smart money concepts.</p>
+        <div class="hero-btns">
+          <a href="index.html" class="btn-primary">Launch Platform →</a>
+          <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hstat-val">45+</div><div class="hstat-lbl">Pairs Covered</div></div>
+          <div><div class="hstat-val">5</div><div class="hstat-lbl">Strategies</div></div>
+          <div><div class="hstat-val">3/5</div><div class="hstat-lbl">Confluence Required</div></div>
+          <div><div class="hstat-val">Free</div><div class="hstat-lbl">No Card Needed</div></div>
+        </div>
+      </div>
+
+      <!-- HERO CHART -->
+      <div class="hero-chart g2">
+        <div class="chart-top">
+          <div>
+            <div class="ct-pair">XAU/USD · H4</div>
+            <div class="ct-price">2,387.40</div>
+          </div>
+          <div class="ct-chg">+0.84%</div>
+        </div>
+
+        <svg viewBox="0 0 380 160" style="width:100%;height:160px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bull" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1E9E6A" stop-opacity=".9"/><stop offset="100%" stop-color="#1E9E6A" stop-opacity=".6"/></linearGradient>
+            <linearGradient id="bear" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D03030" stop-opacity=".85"/><stop offset="100%" stop-color="#D03030" stop-opacity=".6"/></linearGradient>
+            <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5B9BD5" stop-opacity=".2"/><stop offset="100%" stop-color="#5B9BD5" stop-opacity="0"/></linearGradient>
+          </defs>
+          <!-- grid -->
+          <line x1="0" y1="40" x2="380" y2="40" stroke="rgba(91,155,213,.08)" stroke-width="1"/>
+          <line x1="0" y1="80" x2="380" y2="80" stroke="rgba(91,155,213,.08)" stroke-width="1"/>
+          <line x1="0" y1="120" x2="380" y2="120" stroke="rgba(91,155,213,.08)" stroke-width="1"/>
+          <!-- EMA area -->
+          <polygon points="20,120 55,112 90,105 125,96 160,88 195,80 230,73 265,66 300,60 335,54 370,48 370,160 20,160" fill="url(#area)"/>
+          <!-- EMA line -->
+          <polyline points="20,120 55,112 90,105 125,96 160,88 195,80 230,73 265,66 300,60 335,54 370,48" fill="none" stroke="#C08A20" stroke-width="1.5" opacity=".7"/>
+          <!-- candles -->
+          <line x1="28" y1="112" x2="28" y2="130" stroke="#D03030" stroke-width="1"/><rect x="22" y="114" width="12" height="13" fill="url(#bear)" rx="1.5"/>
+          <line x1="54" y1="100" x2="54" y2="118" stroke="#1E9E6A" stroke-width="1"/><rect x="48" y="102" width="12" height="14" fill="url(#bull)" rx="1.5"/>
+          <line x1="80" y1="96" x2="80" y2="112" stroke="#D03030" stroke-width="1"/><rect x="74" y="98" width="12" height="11" fill="url(#bear)" rx="1.5"/>
+          <line x1="106" y1="84" x2="106" y2="102" stroke="#1E9E6A" stroke-width="1"/><rect x="100" y="86" width="12" height="14" fill="url(#bull)" rx="1.5"/>
+          <line x1="132" y1="76" x2="132" y2="96" stroke="#1E9E6A" stroke-width="1"/><rect x="126" y="78" width="12" height="16" fill="url(#bull)" rx="1.5"/>
+          <line x1="158" y1="72" x2="158" y2="90" stroke="#D03030" stroke-width="1"/><rect x="152" y="74" width="12" height="12" fill="url(#bear)" rx="1.5"/>
+          <line x1="184" y1="60" x2="184" y2="80" stroke="#1E9E6A" stroke-width="1"/><rect x="178" y="62" width="12" height="16" fill="url(#bull)" rx="1.5"/>
+          <line x1="210" y1="54" x2="210" y2="72" stroke="#1E9E6A" stroke-width="1"/><rect x="204" y="56" width="12" height="14" fill="url(#bull)" rx="1.5"/>
+          <line x1="236" y1="50" x2="236" y2="68" stroke="#D03030" stroke-width="1"/><rect x="230" y="52" width="12" height="12" fill="url(#bear)" rx="1.5"/>
+          <line x1="262" y1="42" x2="262" y2="62" stroke="#1E9E6A" stroke-width="1"/><rect x="256" y="44" width="12" height="16" fill="url(#bull)" rx="1.5"/>
+          <line x1="288" y1="34" x2="288" y2="56" stroke="#1E9E6A" stroke-width="1"/><rect x="282" y="36" width="12" height="18" fill="url(#bull)" rx="1.5"/>
+          <line x1="314" y1="38" x2="314" y2="52" stroke="#D03030" stroke-width="1"/><rect x="308" y="40" width="12" height="10" fill="url(#bear)" rx="1.5"/>
+          <!-- final big bull candle with glow -->
+          <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <line x1="350" y1="22" x2="350" y2="52" stroke="#1E9E6A" stroke-width="1.5" filter="url(#glow)"/>
+          <rect x="344" y="24" width="14" height="24" fill="url(#bull)" rx="2" filter="url(#glow)"/>
+          <!-- BUY arrow -->
+          <polygon points="350,14 357,22 343,22" fill="#1E9E6A" opacity=".9"/>
+          <text x="350" y="11" text-anchor="middle" fill="#1E9E6A" font-size="8" font-family="DM Sans" font-weight="700">BUY</text>
+          <!-- support dashed -->
+          <line x1="0" y1="140" x2="380" y2="140" stroke="rgba(91,155,213,.3)" stroke-width="1" stroke-dasharray="5,4"/>
+          <text x="4" y="136" fill="rgba(91,155,213,.55)" font-size="7" font-family="JetBrains Mono">SUPPORT</text>
+        </svg>
+
+        <div class="signal-banner">
+          <div class="sig-dot"></div>
+          <div class="sig-text">BUY · 3/5 Strategies Confirmed</div>
+          <div class="sig-lvls">
+            <div>SL <span>2371.20</span></div>
+            <div>TP <span>2412.80</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap z">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span class="t-pair">EUR/USD</span><span class="t-price">1.0842</span><span class="t-chg up">+0.12%</span></div>
+    <div class="ticker-item"><span class="t-pair">GBP/USD</span><span class="t-price">1.2731</span><span class="t-chg dn">-0.08%</span></div>
+    <div class="ticker-item"><span class="t-pair">XAU/USD</span><span class="t-price">2,387.40</span><span class="t-chg up">+0.84%</span></div>
+    <div class="ticker-item"><span class="t-pair">USD/JPY</span><span class="t-price">153.42</span><span class="t-chg up">+0.31%</span></div>
+    <div class="ticker-item"><span class="t-pair">BTC/USD</span><span class="t-price">83,500</span><span class="t-chg up">+1.24%</span></div>
+    <div class="ticker-item"><span class="t-pair">GBP/JPY</span><span class="t-price">195.18</span><span class="t-chg dn">-0.22%</span></div>
+    <div class="ticker-item"><span class="t-pair">AUD/USD</span><span class="t-price">0.6312</span><span class="t-chg up">+0.09%</span></div>
+    <div class="ticker-item"><span class="t-pair">NAS100</span><span class="t-price">18,200</span><span class="t-chg up">+0.56%</span></div>
+    <!-- duplicate -->
+    <div class="ticker-item"><span class="t-pair">EUR/USD</span><span class="t-price">1.0842</span><span class="t-chg up">+0.12%</span></div>
+    <div class="ticker-item"><span class="t-pair">GBP/USD</span><span class="t-price">1.2731</span><span class="t-chg dn">-0.08%</span></div>
+    <div class="ticker-item"><span class="t-pair">XAU/USD</span><span class="t-price">2,387.40</span><span class="t-chg up">+0.84%</span></div>
+    <div class="ticker-item"><span class="t-pair">USD/JPY</span><span class="t-price">153.42</span><span class="t-chg up">+0.31%</span></div>
+    <div class="ticker-item"><span class="t-pair">BTC/USD</span><span class="t-price">83,500</span><span class="t-chg up">+1.24%</span></div>
+    <div class="ticker-item"><span class="t-pair">GBP/JPY</span><span class="t-price">195.18</span><span class="t-chg dn">-0.22%</span></div>
+    <div class="ticker-item"><span class="t-pair">AUD/USD</span><span class="t-price">0.6312</span><span class="t-chg up">+0.09%</span></div>
+    <div class="ticker-item"><span class="t-pair">NAS100</span><span class="t-price">18,200</span><span class="t-chg up">+0.56%</span></div>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section z" id="how-it-works">
+  <div class="wrap">
+    <div class="anim">
+      <div class="section-eye">Simple Process · How It Works</div>
+      <div class="section-title">Get a signal in four steps</div>
+      <div class="section-sub">No setup, no API keys, no complicated inputs. Select your pair and the engine does the rest.</div>
+    </div>
+    <div class="steps-grid anim d2">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-ico">🎯</div>
+        <div class="step-title">Select Your Pair</div>
+        <div class="step-desc">Choose from 45+ pairs — majors, minors, metals, crypto, and indices. Search or browse by category.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-ico">⏱</div>
+        <div class="step-title">Choose Timeframe</div>
+        <div class="step-desc">Pick M5 for scalping up to D1 for swing trading. Set your account balance and risk percentage.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-ico">⚙️</div>
+        <div class="step-title">Engine Analyses</div>
+        <div class="step-desc">5 strategies run simultaneously on real price data. All 3/5 must agree before a signal fires.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-ico">📊</div>
+        <div class="step-title">Get Your Signal</div>
+        <div class="step-desc">Receive exact Entry, SL, TP1 and TP2 with lot size calculated for your risk. No guesswork.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section z" style="padding-top:0">
+  <div class="wrap">
+    <div class="anim">
+      <div class="section-eye">Platform Features</div>
+      <div class="section-title">Everything a serious trader needs</div>
+    </div>
+    <div class="features-grid anim d2">
+      <div class="feat g1"><div class="feat-ico">⚡</div><div class="feat-title">Rule-Based Engine</div><div class="feat-desc">5 strategies vote independently. 3/5 must agree — eliminating weak, low-confidence setups automatically.</div></div>
+      <div class="feat g1"><div class="feat-ico">📡</div><div class="feat-title">Live Price Feed</div><div class="feat-desc">Real-time prices for 45+ pairs including all majors, minors, metals, crypto, and global indices.</div></div>
+      <div class="feat g1"><div class="feat-ico">📈</div><div class="feat-title">TradingView Charts</div><div class="feat-desc">Professional candlestick charts with EMA overlays. Switch pairs and timeframes instantly.</div></div>
+      <div class="feat g1"><div class="feat-ico">🛡</div><div class="feat-title">Risk Management</div><div class="feat-desc">Auto-calculated lot size, pip distance, and trade expectancy based on your account and risk %.</div></div>
+      <div class="feat g1"><div class="feat-ico">📓</div><div class="feat-title">Trade Journal</div><div class="feat-desc">Log every trade. Track your win rate, P&L, and performance across a built-in analytics dashboard.</div></div>
+      <div class="feat g1"><div class="feat-ico">🎓</div><div class="feat-title">Strategy Education</div><div class="feat-desc">Learn each strategy in depth — triggers, entry rules, stop placement, pro tips, and how the engine uses it.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STRATEGIES ── -->
+<section class="section z" style="padding-top:0">
+  <div class="wrap">
+    <div class="anim">
+      <div class="section-eye">5 Engine Strategies</div>
+      <div class="section-title">Institutional-grade analysis</div>
+      <div class="section-sub">Each strategy votes independently. Only when 3 or more agree does a signal fire.</div>
+    </div>
+    <div class="strat-showcase anim d2">
+      <div class="strat-list">
+        <div class="strat-item active" onclick="showStrat(0,this)"><div class="strat-item-ico">📊</div><div class="strat-item-name">EMA Trend Alignment</div><div class="strat-item-wr">Win ~62%</div></div>
+        <div class="strat-item" onclick="showStrat(1,this)"><div class="strat-item-ico">🎯</div><div class="strat-item-name">RSI + Order Block</div><div class="strat-item-wr">Win ~65%</div></div>
+        <div class="strat-item" onclick="showStrat(2,this)"><div class="strat-item-ico">⚡</div><div class="strat-item-name">MACD + Structure Break</div><div class="strat-item-wr">Win ~58%</div></div>
+        <div class="strat-item" onclick="showStrat(3,this)"><div class="strat-item-ico">🔲</div><div class="strat-item-name">FVG Fill Setup</div><div class="strat-item-wr">Win ~60%</div></div>
+        <div class="strat-item" onclick="showStrat(4,this)"><div class="strat-item-ico">🌊</div><div class="strat-item-name">Liquidity Sweep Reversal</div><div class="strat-item-wr">Win ~68%</div></div>
+      </div>
+      <div class="strat-detail g2" id="stratDetail">
+        <div class="sd-num" id="sdNum">01</div>
+        <div class="sd-title" id="sdTitle">EMA Trend Alignment</div>
+        <div class="sd-desc" id="sdDesc">Price and all three EMAs stack in perfect order. Price > EMA20 > EMA50 > EMA200 = confirmed uptrend. The most reliable trend-following signal in the engine.</div>
+        <div class="sd-trigger buy"><div class="sd-trigger-ico">▲</div><div id="sdBuy">BUY: Price above all 3 EMAs stacked in bull order (EMA20 > EMA50 > EMA200)</div></div>
+        <div class="sd-trigger sell"><div class="sd-trigger-ico">▼</div><div id="sdSell">SELL: Price below all 3 EMAs in bear order (EMA20 &lt; EMA50 &lt; EMA200)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CHART PATTERNS ── -->
+<section class="section z" style="padding-top:0">
+  <div class="wrap">
+    <div class="anim">
+      <div class="section-eye">Chart Patterns Detected</div>
+      <div class="section-title">Price action the engine reads</div>
+    </div>
+    <div class="patterns-grid anim d2">
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="55" x2="20" y2="70" stroke="#D03030" stroke-width="1"/><rect x="14" y="57" width="12" height="11" fill="#D03030" rx="1.5" opacity=".7"/>
+          <line x1="42" y1="50" x2="42" y2="66" stroke="#D03030" stroke-width="1"/><rect x="36" y="52" width="12" height="12" fill="#D03030" rx="1.5" opacity=".7"/>
+          <rect x="58" y="44" width="14" height="19" fill="rgba(192,138,32,.2)" rx="2" stroke="rgba(192,138,32,.5)" stroke-width="1"/>
+          <line x1="65" y1="40" x2="65" y2="65" stroke="#C08A20" stroke-width="1"/>
+          <text x="65" y="37" text-anchor="middle" fill="#C08A20" font-size="7" font-family="DM Sans" font-weight="700">OB</text>
+          <line x1="84" y1="30" x2="84" y2="48" stroke="#1E9E6A" stroke-width="1"/><rect x="78" y="32" width="12" height="14" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <line x1="106" y1="20" x2="106" y2="36" stroke="#1E9E6A" stroke-width="1"/><rect x="100" y="22" width="12" height="12" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <line x1="128" y1="38" x2="128" y2="52" stroke="#D03030" stroke-width="1"/><rect x="122" y="40" width="12" height="10" fill="#D03030" rx="1.5" opacity=".5"/>
+          <line x1="150" y1="24" x2="150" y2="42" stroke="#1E9E6A" stroke-width="1"/><rect x="144" y="26" width="12" height="14" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <line x1="172" y1="14" x2="172" y2="30" stroke="#1E9E6A" stroke-width="1"/><rect x="166" y="16" width="12" height="12" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <line x1="58" y1="63" x2="190" y2="63" stroke="rgba(192,138,32,.35)" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="58" y1="44" x2="190" y2="44" stroke="rgba(192,138,32,.35)" stroke-width="1" stroke-dasharray="4,3"/>
+        </svg>
+        <div class="pattern-name">Order Block</div>
+        <span class="pattern-type pt-bull">Bullish / Bearish</span>
+        <div class="pattern-desc">Last candle before institutional displacement. Price returns to this zone for high-probability entries.</div>
+      </div>
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <line x1="18" y1="50" x2="18" y2="68" stroke="#1E9E6A" stroke-width="1"/><rect x="12" y="52" width="12" height="14" fill="#1E9E6A" rx="1.5" opacity=".7"/>
+          <rect x="32" y="30" width="148" height="17" fill="rgba(91,155,213,.08)" stroke="rgba(91,155,213,.25)" stroke-width="1" stroke-dasharray="4,3" rx="3"/>
+          <text x="106" y="41" text-anchor="middle" fill="rgba(91,155,213,.7)" font-size="7" font-family="DM Sans" font-weight="700">FAIR VALUE GAP</text>
+          <line x1="38" y1="16" x2="38" y2="52" stroke="#1E9E6A" stroke-width="1"/><rect x="32" y="18" width="12" height="30" fill="#1E9E6A" rx="1.5" opacity=".85"/>
+          <line x1="60" y1="10" x2="60" y2="24" stroke="#1E9E6A" stroke-width="1"/><rect x="54" y="12" width="12" height="10" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <line x1="96" y1="26" x2="96" y2="42" stroke="#D03030" stroke-width="1"/><rect x="90" y="28" width="12" height="12" fill="#D03030" rx="1.5" opacity=".55"/>
+          <line x1="116" y1="30" x2="116" y2="44" stroke="#D03030" stroke-width="1"/><rect x="110" y="32" width="12" height="10" fill="#D03030" rx="1.5" opacity=".45"/>
+          <line x1="138" y1="16" x2="138" y2="36" stroke="#1E9E6A" stroke-width="1"/><rect x="132" y="18" width="12" height="16" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <line x1="160" y1="6" x2="160" y2="24" stroke="#1E9E6A" stroke-width="1"/><rect x="154" y="8" width="12" height="14" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <polygon points="138,10 145,18 131,18" fill="#1E9E6A" opacity=".8"/>
+        </svg>
+        <div class="pattern-name">Fair Value Gap</div>
+        <span class="pattern-type pt-neut">Imbalance Zone</span>
+        <div class="pattern-desc">3-candle imbalance left by fast moves. Price fills the gap before continuing in the original direction.</div>
+      </div>
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <line x1="14" y1="65" x2="14" y2="78" stroke="#1E9E6A" stroke-width="1"/><rect x="8" y="67" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".6"/>
+          <line x1="34" y1="57" x2="34" y2="70" stroke="#1E9E6A" stroke-width="1"/><rect x="28" y="59" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".6"/>
+          <line x1="54" y1="50" x2="54" y2="63" stroke="#1E9E6A" stroke-width="1"/><rect x="48" y="52" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".6"/>
+          <line x1="10" y1="47" x2="185" y2="47" stroke="rgba(192,138,32,.4)" stroke-width="1" stroke-dasharray="5,3"/>
+          <text x="14" y="44" fill="rgba(192,138,32,.65)" font-size="6.5" font-family="DM Sans" font-weight="700">SWING HIGH / STOPS</text>
+          <line x1="74" y1="34" x2="74" y2="65" stroke="#D03030" stroke-width="1.5"/><rect x="68" y="46" width="12" height="15" fill="#D03030" rx="1.5" opacity=".85"/>
+          <text x="74" y="30" text-anchor="middle" fill="#D03030" font-size="7" font-family="DM Sans" font-weight="700">SWEEP</text>
+          <line x1="94" y1="44" x2="94" y2="60" stroke="#1E9E6A" stroke-width="1.5"/><rect x="88" y="46" width="12" height="12" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <line x1="114" y1="34" x2="114" y2="50" stroke="#1E9E6A" stroke-width="1.5"/><rect x="108" y="36" width="12" height="13" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <line x1="134" y1="24" x2="134" y2="42" stroke="#1E9E6A" stroke-width="1.5"/><rect x="128" y="26" width="12" height="14" fill="#1E9E6A" rx="1.5" opacity=".9"/>
+          <polygon points="114,26 121,36 107,36" fill="#1E9E6A" opacity=".9"/>
+        </svg>
+        <div class="pattern-name">Liquidity Sweep</div>
+        <span class="pattern-type pt-bear">Stop Hunt Reversal</span>
+        <div class="pattern-desc">Price spikes beyond a swing level to hunt stops, then reverses sharply. Highest RRR setup in the engine.</div>
+      </div>
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="10,68 45,62 80,55 115,47 150,40 185,32" fill="none" stroke="#1E9E6A" stroke-width="1.5" opacity=".8"/>
+          <polyline points="10,74 45,69 80,63 115,56 150,50 185,43" fill="none" stroke="#C08A20" stroke-width="1.5" opacity=".7"/>
+          <polyline points="10,80 45,77 80,72 115,66 150,61 185,56" fill="none" stroke="#D03030" stroke-width="1.5" opacity=".55"/>
+          <line x1="90" y1="44" x2="90" y2="57" stroke="#1E9E6A" stroke-width="1"/><rect x="84" y="46" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <line x1="114" y1="36" x2="114" y2="49" stroke="#1E9E6A" stroke-width="1"/><rect x="108" y="38" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <line x1="138" y1="28" x2="138" y2="41" stroke="#1E9E6A" stroke-width="1"/><rect x="132" y="30" width="12" height="9" fill="#1E9E6A" rx="1.5" opacity=".8"/>
+          <text x="170" y="30" fill="#1E9E6A" font-size="7" font-family="JetBrains Mono">EMA20</text>
+          <text x="170" y="41" fill="#C08A20" font-size="7" font-family="JetBrains Mono">EMA50</text>
+          <text x="170" y="54" fill="#D03030" font-size="7" font-family="JetBrains Mono">EMA200</text>
+        </svg>
+        <div class="pattern-name">EMA Stack Alignment</div>
+        <span class="pattern-type pt-bull">Trend Confirmation</span>
+        <div class="pattern-desc">All 3 EMAs in perfect bull/bear order with price on the right side. Strongest trend confirmation signal.</div>
+      </div>
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="50" x2="190" y2="50" stroke="rgba(91,155,213,.15)" stroke-width="1"/>
+          <polyline points="10,65 35,63 60,57 85,50 110,42 135,36 160,32 185,27" fill="none" stroke="#5B9BD5" stroke-width="1.5" opacity=".8"/>
+          <polyline points="10,70 35,67 60,62 85,56 110,49 135,43 160,39 185,33" fill="none" stroke="#C08A20" stroke-width="1.5" stroke-dasharray="4,2" opacity=".7"/>
+          <rect x="12" y="50" width="8" height="8" fill="#D03030" rx="1" opacity=".5"/>
+          <rect x="24" y="50" width="8" height="5" fill="#D03030" rx="1" opacity=".5"/>
+          <rect x="36" y="47" width="8" height="3" fill="#1E9E6A" rx="1" opacity=".5"/>
+          <circle cx="60" cy="50" r="5" fill="none" stroke="#1E9E6A" stroke-width="1.5"/>
+          <circle cx="60" cy="50" r="2" fill="#1E9E6A"/>
+          <text x="60" y="42" text-anchor="middle" fill="#1E9E6A" font-size="7" font-family="DM Sans" font-weight="700">CROSS</text>
+          <rect x="68" y="40" width="8" height="10" fill="#1E9E6A" rx="1" opacity=".6"/>
+          <rect x="80" y="34" width="8" height="16" fill="#1E9E6A" rx="1" opacity=".65"/>
+          <rect x="92" y="28" width="8" height="22" fill="#1E9E6A" rx="1" opacity=".7"/>
+          <rect x="104" y="22" width="8" height="28" fill="#1E9E6A" rx="1" opacity=".75"/>
+          <text x="14" y="82" fill="#5B9BD5" font-size="7" font-family="JetBrains Mono">MACD</text>
+          <text x="50" y="82" fill="#C08A20" font-size="7" font-family="JetBrains Mono">SIGNAL</text>
+        </svg>
+        <div class="pattern-name">MACD Crossover</div>
+        <span class="pattern-type pt-bull">Momentum Signal</span>
+        <div class="pattern-desc">MACD histogram flips — momentum shift confirmed. Most reliable when combined with HH/HL structure.</div>
+      </div>
+
+      <div class="pattern-card g1">
+        <svg class="pattern-svg" viewBox="0 0 200 85" style="width:100%;height:85px" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="18" x2="190" y2="18" stroke="rgba(208,48,48,.25)" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="10" y1="62" x2="190" y2="62" stroke="rgba(30,158,106,.25)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="168" y="15" fill="rgba(208,48,48,.55)" font-size="7" font-family="JetBrains Mono">70</text>
+          <text x="168" y="59" fill="rgba(30,158,106,.55)" font-size="7" font-family="JetBrains Mono">30</text>
+          <polyline points="10,32 30,36 50,46 70,56 86,68 96,74 106,68 122,55 142,42 162,32 182,24" fill="none" stroke="#5B9BD5" stroke-width="2" opacity=".85"/>
+          <polygon points="62,62 78,62 88,62 100,62" fill="rgba(30,158,106,.06)"/>
+          <rect x="78" y="66" width="32" height="12" fill="rgba(192,138,32,.15)" stroke="rgba(192,138,32,.4)" stroke-width="1" rx="3"/>
+          <text x="94" y="74" text-anchor="middle" fill="#C08A20" font-size="7" font-family="DM Sans" font-weight="700">OB ZONE</text>
+          <polygon points="106,56 113,66 99,66" fill="#1E9E6A" opacity=".85"/>
+        </svg>
+        <div class="pattern-name">RSI + Order Block</div>
+        <span class="pattern-type pt-neut">Confluence Setup</span>
+        <div class="pattern-desc">RSI extreme (&lt;35 or &gt;65) inside an Order Block. Double confirmation = highest win rate setup.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section z">
+  <div class="wrap">
+    <div class="cta-card g2 anim">
+      <h2>Ready to trade with <em>real confluence?</em></h2>
+      <p>Free to use, no API keys, no credit card. Just select a pair and let the engine analyse it for you.</p>
+      <a href="index.html" class="btn-primary">Launch Platform Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="z">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div style="width:32px;height:32px;background:rgba(192,138,32,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:900;font-size:14px;color:var(--gold)">Rx</div>
+        <div>
+          <h3>RulerFx <span>Kitchen</span></h3>
+          <div class="footer-copy">© 2026 RulerFx Kitchen</div>
+        </div>
+      </div>
+      <div class="footer-disc">Educational purposes only. Past signal performance does not guarantee future results. Always use proper risk management. Never risk more than you can afford to lose.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const STRATS = [
+  { num:'01', title:'EMA Trend Alignment', desc:'Price and all three EMAs stack in perfect order. Price > EMA20 > EMA50 > EMA200 = confirmed uptrend. The most reliable trend-following signal in the engine.', buy:'BUY: Price above all 3 EMAs in bull order (EMA20 > EMA50 > EMA200)', sell:'SELL: Price below all 3 EMAs in bear order (EMA20 < EMA50 < EMA200)' },
+  { num:'02', title:'RSI + Order Block', desc:'RSI enters extreme territory (below 35 or above 65) while price sits inside an institutional Order Block. Two powerful confirmations in one setup.', buy:'BUY: RSI below 35 AND price inside a Bullish Order Block zone', sell:'SELL: RSI above 65 AND price inside a Bearish Order Block zone' },
+  { num:'03', title:'MACD + Structure Break', desc:'A fresh MACD histogram crossover aligned with confirmed market structure — Higher Highs/Lows for bulls, Lower Highs/Lows for bears. Catches trend continuation early.', buy:'BUY: MACD histogram crosses positive AND market structure shows HH/HL', sell:'SELL: MACD histogram crosses negative AND market structure shows LH/LL' },
+  { num:'04', title:'FVG Fill Setup', desc:'Fair Value Gaps are price imbalances left by fast institutional moves. Price returns to fill these gaps before continuing, creating reliable entries.', buy:'BUY: Price enters a Bullish FVG — imbalance acts as support', sell:'SELL: Price enters a Bearish FVG — imbalance acts as resistance' },
+  { num:'05', title:'Liquidity Sweep Reversal', desc:'Price briefly spikes beyond a swing high/low to hunt retail stop losses, then reverses hard. The highest RRR setup in the engine — often 1:3 or better.', buy:'BUY: Candle wicks below swing low (stop hunt) but closes ABOVE the level', sell:'SELL: Candle wicks above swing high (stop hunt) but closes BELOW the level' },
+];
+function showStrat(i, el) {
+  document.querySelectorAll('.strat-item').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  const s = STRATS[i];
+  document.getElementById('sdNum').textContent   = s.num;
+  document.getElementById('sdTitle').textContent = s.title;
+  document.getElementById('sdDesc').textContent  = s.desc;
+  document.getElementById('sdBuy').textContent   = s.buy;
+  document.getElementById('sdSell').innerHTML    = s.sell;
+}
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
